@@ -1,0 +1,5 @@
+{
+  "dockerImage": "react-fe",
+  "buildCommand": "npm run build",
+  "ignore": [".git", ".gitignore", "README.md", ".dockerignore", "Dockerfile"]
+}

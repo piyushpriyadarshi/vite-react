@@ -4,21 +4,25 @@ import react from "@vitejs/plugin-react";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: `https://ehfe-frontend-app.b-cdn.net/${process.env.TEST_SESSIONID}`,
+  // base: `https://ehfe-frontend-app.b-cdn.net/${process.env.TEST_SESSIONID}`,
   build: {
     rollupOptions: {
       output: {
         chunkFileNames: "[name].[hash].js", // All chunked vendor code will go here
-        assetFileNames: "[name].[ext]",
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name.endsWith(".css")) {
+            return "assets/[name].[hash][extname]";
+          }
+          return "assets/[name][extname]";
+        },
         // Custom chunk splitting
-        // manualChunks(id) {
-        //   if (id.includes("node_modules")) {
-        //     // Exclude node_modules from being bundled
-        //     return "vendor"; // This will be the shared vendor chunk if needed
-        //   }
-        // },
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            // Exclude node_modules from being bundled
+            return "vendor"; // This will be the shared vendor chunk if needed
+          }
+        },
       },
-      external: ["react", "react-dom"], // Add other dependencies you want to exclude
     },
     // Externalize vendor libraries
   },
