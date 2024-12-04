@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // base: `https://ehfe-frontend-app.b-cdn.net/${process.env.TEST_SESSIONID}`,
+  base: `https://ehfe-frontend-app.b-cdn.net/${process.env.TEST_SESSIONID}`,
   build: {
     rollupOptions: {
       output: {
